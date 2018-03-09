@@ -1,6 +1,6 @@
 #pragma once
 #ifdef TEST_USE_CUBE
-const std::vector<Vertex> HelloTriangleApplication::s_Vertices = {
+const std::vector<Vertex> VulkanApplication::s_Vertices = {
 	// Top
 	{ { -0.5f, -0.5,  0.5f },{ 1.0f, 0.0f } },
 	{ { 0.5f, -0.5,  0.5f },{ 0.0f, 0.0f } },
