@@ -1,6 +1,6 @@
 #pragma once
 #ifdef TEST_USE_CUBE
-const std::vector<uint16_t>HelloTriangleApplication::s_Indices = {
+const std::vector<uint16_t>VulkanApplication::s_Indices = {
 	4 * 0 + 0, 4 * 0 + 1, 4 * 0 + 2, 4 * 0 + 2, 4 * 0 + 3, 4 * 0 + 0, // Top
 	4 * 1 + 0, 4 * 1 + 1, 4 * 1 + 2, 4 * 1 + 2, 4 * 1 + 3, 4 * 1 + 0, // Left
 	4 * 2 + 0, 4 * 2 + 1, 4 * 2 + 2, 4 * 2 + 2, 4 * 2 + 3, 4 * 2 + 0, // Front
