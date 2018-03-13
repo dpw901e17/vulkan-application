@@ -19,7 +19,7 @@ ECHO Now, next time you press ENTER, the tests will begin.
 PAUSE
 
 CALL :repeat %testCount% for_body
-ECHO Test complete! You did it, Morty!
+ECHO Test complete!
 PAUSE
 
 GOTO :EOF
