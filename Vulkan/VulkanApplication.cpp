@@ -43,7 +43,7 @@ VulkanApplication::VulkanApplication(Scene scene, Window& win)
 void VulkanApplication::run()
 {
 	auto threadCount = TestConfiguration::GetInstance().drawThreadCount;
-	m_ThreadPool = new ThreadPool<DrawRenderObjectsInfo>(threadCount);
+	m_ThreadPool = new ThreadPool(threadCount);
 	m_QueryResults.resize(threadCount);
 
 	initVulkan();
@@ -436,6 +436,7 @@ void VulkanApplication::createSemaphores() {
 	 /***********************************************************************************/
 	 //Thread recording of draw commands:
 	 auto threadCount = TestConfiguration::GetInstance().drawThreadCount;
+	 std::vector<std::future<void>> futures;
 	 for (auto i = 0; i < threadCount; ++i) {
 		 DrawRenderObjectsInfo drawROInfo = {};
 
@@ -467,8 +468,7 @@ void VulkanApplication::createSemaphores() {
 		 drawROInfo.framebuffer = &m_SwapChainFramebuffers[frameIndex];
 		 drawROInfo.dynamicUniformBufferStride = m_DynamicAllignment * m_Scene.renderObjects().size();
 
-		 ThreadJob<DrawRenderObjectsInfo> job = ThreadJob<DrawRenderObjectsInfo>(DrawRenderObjects, drawROInfo);
-		 m_ThreadPool->AddThreadJob(job);
+		 futures.push_back(m_ThreadPool->enqueue(DrawRenderObjects, drawROInfo));
 	 }
 	 /***********************************************************************************/
 
@@ -490,8 +490,8 @@ void VulkanApplication::createSemaphores() {
 	 startCommandBuffer.beginRenderPass(drawRenderPassInfo, vk::SubpassContents::eSecondaryCommandBuffers);
 	 
 	 //wait for all recordings to finish
-	 while (!m_ThreadPool->Idle()) {
-		 //std::this_thread::sleep_for(std::chrono::milliseconds(TEST_THREAD_JOB_WAIT_TIME));
+	 for (auto& future : futures) {
+		 future.wait();
 	 }
 
 	 startCommandBuffer.executeCommands(threadCount, &m_DrawCommandBuffers[frameIndex * threadCount]);

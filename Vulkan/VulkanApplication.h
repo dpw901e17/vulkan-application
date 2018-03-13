@@ -96,7 +96,7 @@ private:
 	DataCollection<WMIDataItem> wmiCollection;
 	DataCollection<PipelineStatisticsDataItem> pipelineStatisticsCollection;
 
-	ThreadPool<DrawRenderObjectsInfo>* m_ThreadPool;
+	ThreadPool* m_ThreadPool;
 
 	static const std::vector<const char*> s_DeviceExtensions;
 	static const std::vector<Vertex> s_Vertices;
