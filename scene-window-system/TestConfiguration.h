@@ -16,6 +16,7 @@ struct TestConfiguration
 	size_t cubeDimension = 2;
 	int cubePadding = 1;
 	bool recordFPS = false;
+	bool recordFrameTime = false;
 
 	//TODO: use better pattern than singleton?
 	static TestConfiguration& GetInstance() 
@@ -98,6 +99,9 @@ struct TestConfiguration
 			}
 			else if (a == "-fps") {
 				testConfig.recordFPS = true;
+			}
+			else if (a == "-frameTime") {
+				testConfig.recordFrameTime = true;
 			}
 		}
 	}

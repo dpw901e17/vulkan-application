@@ -27,7 +27,7 @@ const std::vector<const char*> VulkanApplication::s_DeviceExtensions = {
 	VK_KHR_SWAPCHAIN_EXTENSION_NAME
 };
 
-#define TEST_USE_SKULL
+#define TEST_USE_CUBE
 #include "VertexCube.h"
 #include "IndexCube.h"
 #include "VertexSkull.h"
@@ -1097,6 +1097,10 @@ void VulkanApplication::mainLoop() {
 	int oldfps = 0;	//<-- this one is recorded by the probe (and set once per second)
 	size_t secondTrackerInNanoSec = 0;
 
+	auto frametimes = std::vector<size_t>(); //<-- holds frame times in ns
+	std::stringstream frametimeCsv;
+	frametimeCsv << "frametime(nanoseconds)\n";
+
 	while ((nanoSec / 1000000000 < testConfig.seconds) || (testConfig.seconds == 0))
 	{
 		MSG message;
@@ -1132,6 +1136,10 @@ void VulkanApplication::mainLoop() {
 				secondTrackerInNanoSec %= 1000000000;
 				oldfps = fps;
 				fps = 0;
+
+				if (TestConfiguration::GetInstance().recordFrameTime) {
+					frametimeCsv << delta << "\n";
+				}
 
 				if (TestConfiguration::GetInstance().recordFPS) {
 					fpsCsv << oldfps << "\n";
@@ -1219,6 +1227,10 @@ void VulkanApplication::mainLoop() {
 
 	if (testConfig.recordFPS) {
 		SaveToFile("fps_" + fname + ".csv", fpsCsv.str());
+	}
+
+	if (testConfig.recordFrameTime) {
+		SaveToFile("frameTime_" + fname + ".csv", frametimeCsv.str());
 	}
 
 	delete localNow;
