@@ -20,4 +20,4 @@ The settings used were; 5x5x5 initial scene, set increments to 5, run for 30 sec
 To change between rendering the cube-model or the skull-model, change the defined macro in file "VulkanApplication.cpp" line 30 to TEST_USE_CUBE or TEST_USE_SKULL.
 
 ## Acknowledgements
-https://vulkan-tutorial.com/ was used as a starting off point, when creating this repository. Thus there may be some similariites in program structure.
+https://vulkan-tutorial.com/ was used as a starting off point, when creating this repository. Thus there may be some similarities in program structure.
