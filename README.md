@@ -12,6 +12,8 @@ The relevant code for this project is located in the Vulkan folder.
 * Graphics card compatible with Vulkan
 * LunarG Vulkan SDK (must be located in "C:\VulkanSDK\1.0.65.0\")
 
+In addition to the previously mentioned requirements the test also use Open Hardware Monitor, which must be installed in "%PROGAMFILES(x84)%\OpenHardwareMonitor".
+
 ## Run the tests
 
 For running the test described in the article, build the project and run the "testrick.bat" batch file in the same folder as the executable.
