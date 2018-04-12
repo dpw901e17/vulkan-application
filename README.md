@@ -1,7 +1,8 @@
 # Vulkan
 
-This is the Vulkan repository for the application as described in "Comparing Direct3D 12 and Vulkan onPerformance and Programmability".
+This is the Vulkan repository for the application as described in "Comparing Direct3D 12 and Vulkan on Performance and Programmability".
 The relevant code is located in the Vulkan folder.
+
 Associated repos are:
 * https://github.com/dpw901e17/Direct3D12-Application
 * https://github.com/dpw901e17/data
@@ -12,12 +13,18 @@ For running the program:
 * 64-bit version of Windows 10
 * Visual Studio 15 or later
 * Graphics card compatible with Vulkan
-* LunarG Vulkan SDK (must be located in "C:\VulkanSDK\1.0.65.0\")
+* LunarG Vulkan SDK. 
+
+
+The include path for Lunar SDK header is hardcoded to be at C:\VulkanSDK\1.0.57.0\", and the version used is 1.0.57.0. A newer SDK can be used at your discretion. 
+
 
 For running the tests, we additionally require Open Hardware Monitor v. 0.7.1 beta to be installed at "%PROGAMFILES(x84)%\OpenHardwareMonitor".
 It can be installed from http://openhardwaremonitor.org/.
 
 ## Run the tests
+Tests are executed in release mode building for x64 processors.
+
 Tests can be executed with either a cube-model or a skull-model. You can define the one to use through the macro in file "VulkanApplication.cpp" line 30, which should be set to TEST_USE_CUBE or TEST_USE_SKULL.
 
 The repository is set up for running two types of tests, which are executed through bat-scripts run in the same directory as the application executable. Folders containing generated data are named with a timestamp.
